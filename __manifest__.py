@@ -6,7 +6,7 @@
     'depends': ['account','l10n_ar','l10n_ar_afipws_fe'],
     'data': [
         'afip_view.xml',
-        # 'report_template.xml'
+        'report_template.xml'
     ],
     'demo': [
         ],
