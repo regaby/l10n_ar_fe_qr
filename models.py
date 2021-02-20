@@ -1,6 +1,7 @@
 from odoo import fields, models
 import json
 import base64
+import requests
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
@@ -36,8 +37,11 @@ class AccountInvoice(models.Model):
                 enc = res.encode()
                 b64 = base64.encodestring(enc)
                 rec.texto_modificado_qr = 'https://www.afip.gob.ar/fe/qr/?p=' + str(b64)
+                rec.image_qr = base64.b64encode(requests.get(self.env['ir.config_parameter'].get_param('web.base.url') + '/report/barcode/?type=QR&value=' + 'https://www.afip.gob.ar/fe/qr/?p=' + str(b64) + '&width=180&height=180').content)
             else:
                 rec.texto_modificado_qr = 'https://www.afip.gob.ar/fe/qr/?ERROR'
+                rec.image_qr = False
 
     json_qr = fields.Char("JSON QR AFIP",compute=_compute_json_qr)
     texto_modificado_qr = fields.Char('Texto Modificado QR',compute=_compute_json_qr)
+    image_qr = fields.Binary('QR Imagen', compute=_compute_json_qr)

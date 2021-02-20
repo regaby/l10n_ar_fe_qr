@@ -11,6 +11,7 @@
 			<field name="afip_xml_response" position="after">
 				<field name="json_qr"></field>
 				<field name="texto_modificado_qr"></field>
+				<field name="image_qr" widget="image" />
 			</field>
 		</field>
 	</record>
