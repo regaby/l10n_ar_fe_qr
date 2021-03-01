@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from openerp import api, fields, models
 import json
 import base64
 import requests
@@ -42,7 +42,7 @@ class AccountInvoice(models.Model):
             else:
                 rec.texto_modificado_qr = 'https://www.afip.gob.ar/fe/qr/?ERROR'
                 rec.image_qr = False
-    
+
     json_qr = fields.Char("JSON QR AFIP",compute=_compute_json_qr)
     texto_modificado_qr = fields.Char('Texto Modificado QR',compute=_compute_json_qr)
     image_qr = fields.Binary('QR Imagen', compute=_compute_json_qr)
